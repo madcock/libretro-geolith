@@ -719,7 +719,11 @@ void retro_get_system_info(struct retro_system_info *info) {
 void retro_get_system_av_info(struct retro_system_av_info *info) {
     info->timing = (struct retro_system_timing) {
         .fps = systype ? FRAMERATE_MVS : FRAMERATE_AES,
+#if !defined(SF2000)
         .sample_rate = systype ? 55555 : 55943.49
+#else
+        .sample_rate = systype ? 22050 : 22050
+#endif
     };
 
     info->geometry = (struct retro_game_geometry) {
